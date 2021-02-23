@@ -1,19 +1,21 @@
-version: '2'
+version: "2"
 
 # Define the services/containers to be run
 services:
-    angular:
-        build: ../../Pneuma
-        ports:
-            - "4200:4200"
-            - "49153:49153"
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: berrybox_mongo
+    volumes:
+      - mongo-data:/data/db
 
-    database:
-        image: mongo
-        ports:
-            - "27017:27017"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    container_name: berrybox_redis
 
-    redis:
-        image: redis
-        ports:
-            - "6379:6379"
+# Give the volumes
+volumes:
+  mongo-data:
